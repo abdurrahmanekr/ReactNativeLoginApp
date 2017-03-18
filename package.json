@@ -12,6 +12,7 @@
     "react-native-elements": "^0.10.0",
     "react-native-router-flux": "^3.37.0",
     "react-native-scrollable-tab-view": "^0.7.3",
+    "react-native-sqlite-storage": "^3.2.2",
     "react-native-vector-icons": "^4.0.0"
   },
   "devDependencies": {

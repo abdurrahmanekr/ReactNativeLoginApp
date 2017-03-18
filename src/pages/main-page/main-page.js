@@ -15,6 +15,9 @@ export default class MainPage extends Component {
 
 	constructor(props) {
 	  	super(props);
+	  	SqlService.query("SELECT * FROM TEST").then(res => {
+	  		debugger;
+	  	})
 	}
 
 	render() {

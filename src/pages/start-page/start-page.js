@@ -11,12 +11,22 @@ import {
 	isLogin
 } from '../../common/index';
 
+import SqlService from '../../providers/SqlService';
+
 export default class StartPage extends Component {
-	
+
 	constructor(props) {
 		super(props);
 
 		this.isLoginControl();
+		SqlService.query("CREATE TABLE IF NOT EXISTS TEST (id TEXT)").then(res => {
+	  		SqlService.insert("TEST", ["id"], ["1"]).then(res =>  {
+	  			debugger;
+	  			SqlService.select("TEST", "*").then(res =>  {
+		  			debugger;
+		  		})
+	  		})
+	  	})
 	}
 
 	async isLoginControl() {
@@ -24,7 +34,7 @@ export default class StartPage extends Component {
 		isLogin().then((res) => {
 			if (res)
 				Actions.MainPage({type: 'reset'});
-			else 
+			else
 				Actions.LoginPage({type: 'reset'});
 		})
 	}
@@ -42,4 +52,4 @@ export default class StartPage extends Component {
 			</View>
 		);
 	}
-} 
+}
