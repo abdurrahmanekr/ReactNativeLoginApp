@@ -1,30 +1,27 @@
-import React, { Component } from 'react';
-import {
-	AppRegistry,
-	StyleSheet,
-	Text,
-	View,
-	Navigator
-} from 'react-native';
-import {Actions, Scene, Router} from 'react-native-router-flux';
+import React from "react";
 
-import LoginPage from './src/pages/login-page/login-page';
-import MainPage from './src/pages/main-page/main-page';
-import StartPage from './src/pages/start-page/start-page';
+import { AppRegistry, StyleSheet, Text, View } from "react-native";
+import { StackNavigator } from "react-navigation";
 
-export default class LoginApp extends Component {
+import LoginPage from "./src/pages/login-page/login-page";
+import MainPage from "./src/pages/main-page/main-page";
+import StartPage from "./src/pages/start-page/start-page";
+
+export default class LoginApp extends React.Component {
 
 	render() {
-		const scenes = Actions.create(
-		  <Scene key="root" hideNavBar={true}>
-		    <Scene key="StartPage" component={StartPage}/>
-		    <Scene key="LoginPage" component={LoginPage}/>
-		    <Scene key="MainPage" component={MainPage}/>
-		  </Scene>
+		const LoginApp = StackNavigator({
+			StartPage: { screen: StartPage },
+			MainPage: { screen: MainPage },
+			LoginPage: { screen: LoginPage }
+		});
+		return (
+			<LoginApp
+				ref={nav => {
+					this.navigator = nav;
+				}}
+			/>
 		);
-
-		return <Router scenes={scenes}/>
 	}
 }
-
-AppRegistry.registerComponent('LoginApp', () => LoginApp);
+AppRegistry.registerComponent("LoginApp", () => LoginApp);

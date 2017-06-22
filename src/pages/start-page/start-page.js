@@ -21,21 +21,18 @@ export default class StartPage extends Component {
 		this.isLoginControl();
 		SqlService.query("CREATE TABLE IF NOT EXISTS TEST (id TEXT)").then(res => {
 	  		SqlService.insert("TEST", ["id"], ["1"]).then(res =>  {
-	  			debugger;
-	  			SqlService.select("TEST", "*").then(res =>  {
-		  			debugger;
-		  		})
+	  			SqlService.select("TEST", "*").then(res =>  {})
 	  		})
 	  	})
 	}
 
 	async isLoginControl() {
-		var present = this;
+		var self = this;
 		isLogin().then((res) => {
 			if (res)
-				Actions.MainPage({type: 'reset'});
+				self.props.navigation.navigate('MainPage');
 			else
-				Actions.LoginPage({type: 'reset'});
+				self.props.navigation.navigate('LoginPage');
 		})
 	}
 

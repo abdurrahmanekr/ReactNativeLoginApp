@@ -7,7 +7,8 @@ import {
 	Button,
 	Alert
 } from 'react-native';
-import {Actions, Scene, Router} from 'react-native-router-flux';
+
+import { NavigationActions } from "react-navigation";
 
 import {
 	serializeKey,
@@ -18,7 +19,6 @@ export default class LoginPage extends Component {
 
 	constructor(props) {
 		super(props);
-
 		this.state = {
 			userName: "",
 			userPassword: ""
@@ -29,7 +29,7 @@ export default class LoginPage extends Component {
 		// ajax il kontrol
 		var name = this.state.userName;
 		var pass = this.state.userPassword;
-		var present = this;
+		var self = this;
 		if (name == "" || pass == "") {
 			Alert.alert("Boş bırakamazsınız");
 		} else {
@@ -49,8 +49,8 @@ export default class LoginPage extends Component {
 					setSessionTicket(String(res.session_ticket));
 
 				if (res.result != -1)
-					Actions.MainPage({type: 'reset'});
-				else 
+					self.props.navigation.navigate('MainPage');
+				else
 					Alert.alert("Kullanıcı doğrulanamadı");
 			})
 			.catch((err) => {
@@ -65,8 +65,8 @@ export default class LoginPage extends Component {
 				style={{
 					flex: 1,
 					flexDirection: 'column',
-			        justifyContent: 'center',
-			        padding: 15
+					justifyContent: 'center',
+					padding: 15
 				}}>
 				<View>
 					<TextInput
@@ -91,11 +91,11 @@ export default class LoginPage extends Component {
 						height: 50
 					}}>
 					<Button
-					  	title="Giriş" // butonun yazısı
-					  	color="#4285f4" // arkaplan rengi
-					  	onPress={this.goLogin.bind(this)} /* butona tıklandığında tetiklenecek fonksiyon*/ />
+						title="Giriş" // butonun yazısı
+						color="#4285f4" // arkaplan rengi
+						onPress={this.goLogin.bind(this)} /* butona tıklandığında tetiklenecek fonksiyon*/ />
 				</View>
 			</View>
 		);
 	}
-} 
+}
